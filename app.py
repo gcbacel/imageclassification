@@ -30,9 +30,7 @@ def predict(image_path):
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
 st.title("Classify an image among 1000 categories")
-st.write("Example using Convolutional Neural Network")
-st.write("by Gunther Bacellar")
-st.write("")
+st.write("Example using Convolutional Neural Network by Gunther Bacellar")
 
 file_up = st.file_uploader("Upload a JPG image", type="jpg")
 
@@ -44,5 +42,10 @@ if file_up is not None:
     labels = predict(file_up)
 
     # print out the top 5 prediction labels with scores
-    for i in labels:
-        st.write("Prediction (index, name)", i[0], ",   Score: ", i[1])
+  
+    for i, label in enumerate(labels):        
+        if i == 0:
+            st.write(f"Prediction #1 as {label[0].split(', ')[1]} (score: {label[1]:.4f})")
+            st.write("Other smaller possibilities:")
+        else:
+            st.write(f" {i+1}. {label[0].split(', ')[1]} (score: {label[1]:.4f})")
